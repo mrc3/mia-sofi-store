@@ -1,0 +1,83 @@
+/* ==============================================================
+   CONFIGURACIÓN DE TU TIENDA — EDITÁ SOLAMENTE ESTE ARCHIVO.
+   Todas las cantidades y precios están en guaraníes por defecto.
+   IMPORTANTE: reemplazá el alias y el WhatsApp ANTES de publicar.
+   ============================================================== */
+
+window.TIENDA_CONFIG = {
+  negocio: {
+    nombre: "Mia Sofi Store",
+    lema: "Ropa, accesorios y bazar para bebés, nenes y criaturas tiernas",
+    moneda: "PYG",
+    idioma: "es-PY",
+    aliasTransferencia: "mia-sofi-store.ci",
+    whatsapp: "595991830352"
+  },
+
+  productos: [
+    {
+      id: "body-bebe",
+      nombre: "Body para bebé",
+      descripcion: "Ropa suave y cómoda para cada día, con look tiernito y práctico.",
+      precio: 65000,
+      imagen: "img/body.svg",
+      badge: "Top"
+    },
+    {
+      id: "vestido-nina",
+      nombre: "Vestido de niña",
+      descripcion: "Conjunto ideal para salir, festejar o lucir con estilo en verano.",
+      precio: 98000,
+      imagen: "img/dress.svg",
+      badge: "Nuevo"
+    },
+    {
+      id: "pijama-nino",
+      nombre: "Pijama de niño",
+      descripcion: "Tejido suave y acolchado para noches cómodas y relajadas.",
+      precio: 89000,
+      imagen: "img/pijama.svg",
+      badge: "Popular"
+    },
+    {
+      id: "manta-bebe",
+      nombre: "Manta para bebé",
+      descripcion: "Abrigada y práctica para momentos de calma, sueño y conexión.",
+      precio: 76000,
+      imagen: "img/blanket.svg",
+      badge: "Bebé"
+    },
+    {
+      id: "perfume-tierno",
+      nombre: "Perfumes y fragancias",
+      descripcion: "Aromas dulces, modernos y muy bonitos para regalar o usar diario.",
+      precio: 120000,
+      imagen: "img/plush.svg",
+      badge: "Promo"
+    },
+    {
+      id: "muñeco-felpa",
+      nombre: "Muñeco de felpa",
+      descripcion: "Adorable para decorar, regalar o darle un toque más tierno al cuarto.",
+      precio: 55000,
+      imagen: "img/plush.svg",
+      badge: "Regalo"
+    },
+    {
+      id: "accesorio-bazar",
+      nombre: "Accesorios de bazar",
+      descripcion: "Detalles bonitos y útiles para el día a día en casa y para regalar.",
+      precio: 32000,
+      imagen: "img/taza.svg",
+      badge: "Bazar"
+    },
+    {
+      id: "set-bebe",
+      nombre: "Set de bebé y bazar",
+      descripcion: "Artículos funcionales, tiernos y decorativos para bebés y hogar.",
+      precio: 43000,
+      imagen: "img/body.svg",
+      badge: "Combo"
+    }
+  ]
+};

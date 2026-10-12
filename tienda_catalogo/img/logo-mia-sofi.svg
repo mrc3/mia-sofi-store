@@ -1,0 +1,32 @@
+<svg width="800" height="800" viewBox="0 0 800 800" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="120" y1="120" x2="650" y2="680" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FDE8F1"/>
+      <stop offset="1" stop-color="#F8D4E5"/>
+    </linearGradient>
+    <linearGradient id="heart" x1="260" y1="220" x2="560" y2="620" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F7C9D9"/>
+      <stop offset="1" stop-color="#E77DA7"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="200" y1="180" x2="620" y2="620" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFF7FB"/>
+      <stop offset="1" stop-color="#F3D2E0"/>
+    </linearGradient>
+  </defs>
+  
+  <circle cx="400" cy="400" r="300" fill="url(#bg)"/>
+  <circle cx="400" cy="400" r="245" fill="white" fill-opacity="0.38"/>
+  
+  <path d="M404 190C473 190 538 250 538 328C538 426 472 493 404 563C336 493 270 426 270 328C270 250 335 190 404 190Z" fill="url(#heart)"/>
+  <path d="M324 316C367 270 395 254 404 254C413 254 441 270 484 316" stroke="#FFFDFE" stroke-width="18" stroke-linecap="round"/>
+  <path d="M330 382C350 356 374 344 404 344C434 344 458 356 478 382" stroke="#FFFDFE" stroke-width="16" stroke-linecap="round"/>
+  
+  <path d="M173 430C230 370 256 350 279 354C246 351 213 377 201 401C196 412 192 431 173 430Z" fill="url(#accent)"/>
+  <path d="M628 430C571 370 544 350 522 354C554 351 587 377 599 401C604 412 608 431 628 430Z" fill="url(#accent)"/>
+  
+  <path d="M272 505C328 471 374 457 404 457C434 457 480 471 536 505" stroke="#C85D8B" stroke-width="15" stroke-linecap="round"/>
+  <path d="M400 221V592" stroke="#C85D8B" stroke-width="12" stroke-linecap="round" opacity="0.75"/>
+  <path d="M255 286C295 259 337 243 400 243C463 243 505 259 545 286" stroke="#C85D8B" stroke-width="12" stroke-linecap="round" opacity="0.6"/>
+  
+  <text x="400" y="686" text-anchor="middle" fill="#A63868" font-size="62" font-family="Georgia, 'Times New Roman', serif" font-weight="700">Mia Sofi Store</text>
+</svg>
