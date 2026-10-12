@@ -16,21 +16,25 @@ Editá **solo `config.js`** para los cambios habituales:
 - `negocio.aliasTransferencia`: reemplazá `TU_ALIAS_AQUI` por el alias real de tu cuenta.
 - `negocio.whatsapp`: número **del vendedor** en formato internacional, sin `+`, guiones ni espacios. Por ejemplo, para Paraguay, `595981123456` es *solo un ejemplo de formato*, **no** un número al que debas enviar clientes.
 - `negocio.moneda` y `negocio.idioma`: por defecto se usan guaraníes y formato de Paraguay.
-- `productos`: cada producto tiene `id`, `nombre`, `descripcion`, `precio` (número) e `imagen`. Agregá o quitá objetos siguiendo los ejemplos. Usá `id` únicos y no los cambies una vez que la tienda esté publicada; así se conservan las referencias del carrito.
+- `productos`: cada producto tiene `id`, `nombre`, `descripcion`, `precio` (número), `imagen` y `categoria` (una o varias). Usá `id` únicos y no los cambies una vez publicada la tienda, para conservar el carrito.
+- `destacado: true` incluye el producto en la selección destacada; `novedad: true` lo marca para el filtro y el orden de novedades.
+- `stock`: usá un entero para mostrar unidades, `0` para agotado; si se omite, el catálogo indica que hay que consultar disponibilidad y no inventa cantidades.
+- `imagenes`: lista opcional de rutas adicionales para activar la galería. Por ejemplo, `imagenes: ["img/foto-frente.webp", "img/foto-detalle.webp"]`.
+- `negocio.costosEntrega`: costos en guaraníes por modalidad. `retiro: 0` indica retiro sin costo; `local: null`, `interiorNsa: null` e `interiorTsi: null` muestran “A coordinar” hasta definir tarifas.
 
-Para usar tus fotos, copialas en `img/` y cambiá la ruta, por ejemplo: `imagen: "img/mi-foto.jpg"`. Las fotos pueden ser JPG, PNG, WebP o SVG. Recomendación: misma proporción y tamaño aproximado para todos los productos.
+Para usar tus fotos, copialas en `img/` y cambiá la ruta de `imagen`; agregá más tomas a `imagenes`. Se admiten JPG, PNG, WebP, AVIF y SVG. Priorizá WebP/AVIF comprimidos, buena iluminación y una proporción consistente.
 
 **Importante:** mientras el alias y WhatsApp no estén configurados, el botón de WhatsApp estará deshabilitado, para evitar pedidos a datos ficticios.
 
 ## 3. Cómo funciona
 
-1. El cliente elige productos y cantidades; el carrito se guarda en el `localStorage` de ese navegador.
-2. Puede aumentar, disminuir o quitar artículos. El total se recalcula automáticamente con los **precios actuales** del archivo de configuración.
-3. Al pulsar **Pagar por transferencia**, ve el alias, el desglose y el total.
-4. Al pulsar **Enviar pedido por WhatsApp**, se abre el chat del vendedor con el pedido y el total precargados.
-5. **El cliente debe adjuntar manualmente el comprobante** en WhatsApp. Una web estática no puede añadir el archivo al mensaje por sí sola.
+1. El cliente puede buscar, filtrar y ordenar productos; el carrito se guarda en el `localStorage` de ese navegador.
+2. El checkout revisa el pedido, solicita modalidad y datos de entrega, y luego muestra Ueno y el alias.
+3. Si una tarifa es `null`, se informa “A coordinar” y el monto final queda pendiente de confirmación por WhatsApp.
+4. El botón **Enviar pedido por WhatsApp** incluye artículos, cantidades, subtotal y los datos de entrega.
+5. **El cliente debe adjuntar manualmente el comprobante** en WhatsApp; una web estática no puede adjuntar archivos por sí sola.
 
-El carrito pertenece a cada navegador/dispositivo. Sin backend no hay control compartido de stock, gestión de pedidos, confirmación automática de transferencias ni sincronización del carrito entre dispositivos. El negocio debe comprobar el pago antes de entregar.
+El carrito pertenece a cada navegador/dispositivo. Sin backend no hay reserva compartida de stock, gestión central de pedidos, confirmación automática de transferencias ni sincronización entre dispositivos. El negocio debe comprobar el pago antes de entregar.
 
 ## 4. Cómo publicar sin servidor propio
 

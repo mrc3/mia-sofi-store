@@ -3,12 +3,18 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#e878a5">
-  <meta name="description" content="Elegí tus productos, armá tu carrito y coordiná el pago por transferencia y WhatsApp.">
-  <title>Catálogo y carrito | Tienda</title>
-  <link rel="stylesheet" href="styles.css">
-  <script src="config.js?v=3" defer></script>
-  <script src="app.js" defer></script>
+  <meta name="theme-color" content="#94546A">
+  <meta name="description" content="Ropa, belleza, accesorios y bazar para bebés y niños. Comprá en Mikaris Store y coordiná la entrega por WhatsApp.">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Mikaris Store | Moda, belleza y bazar">
+  <meta property="og:description" content="Encontrá ropa, belleza, accesorios y artículos para el hogar en Mikaris Store.">
+  <meta property="og:image" content="https://mrc3.github.io/mia-sofi-store/Logotipo%20Mikaris%20Store%20en%20rosa%20delicado.png">
+  <meta property="og:url" content="https://mrc3.github.io/mia-sofi-store/">
+  <link rel="icon" type="image/png" href="Logotipo%20Mikaris%20Store%20en%20rosa%20delicado.png">
+  <title>Mikaris Store | Moda, belleza y bazar</title>
+  <link rel="stylesheet" href="styles.css?v=4">
+  <script src="config.js?v=6" defer></script>
+  <script src="app.js?v=10" defer></script>
 </head>
 <body>
   <header class="site-header">
@@ -17,7 +23,11 @@
         <img class="brand-mark" src="Logotipo%20Mikaris%20Store%20en%20rosa%20delicado.png" alt="Logotipo Mikaris Store" />
         <span id="brandName">Tu tienda</span>
       </a>
-      <a class="header-cart" href="#carrito" aria-label="Ir al carrito">
+      <a class="header-contact" id="headerContact" href="#" aria-label="Contactar por WhatsApp" target="_blank" rel="noopener noreferrer" hidden>
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M20.52 3.48A11.87 11.87 0 0 0 12.05 0C5.46 0 .1 5.36.1 11.95c0 2.1.55 4.14 1.6 5.94L0 24l6.27-1.64a11.9 11.9 0 0 0 5.78 1.47H12c6.59 0 11.95-5.36 11.95-11.95 0-3.19-1.24-6.19-3.43-8.4ZM12 21.8a9.88 9.88 0 0 1-5.04-1.38l-.36-.22-3.72.98.99-3.63-.24-.38a9.9 9.9 0 0 1-1.52-5.22C2.11 6.52 6.56 2.1 12.04 2.1c2.65 0 5.14 1.03 7.01 2.9a9.84 9.84 0 0 1 2.9 7.01A9.94 9.94 0 0 1 12 21.8Zm5.45-7.4c-.3-.15-1.77-.87-2.04-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.23-.65.08-.3-.15-1.26-.46-2.4-1.47-.89-.79-1.49-1.77-1.66-2.07-.17-.3-.02-.47.13-.62.14-.13.3-.35.45-.52.15-.18.2-.3.3-.5.1-.2.05-.38-.02-.53-.08-.15-.68-1.62-.93-2.22-.24-.58-.48-.5-.67-.5h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.22 3.08c.15.2 2.12 3.24 5.13 4.54.72.31 1.28.5 1.72.64.72.23 1.38.2 1.9.12.58-.09 1.77-.72 2.02-1.42.25-.7.25-1.3.17-1.42-.07-.13-.27-.2-.57-.35Z"/></svg>
+        <span>WhatsApp</span>
+      </a>
+      <a class="header-cart" id="headerCartLink" href="#carrito" aria-label="Ir al carrito">
         <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.5 13.5h13L23 6H6"/></svg>
         <span>Mi carrito</span>
         <span class="cart-count" id="headerCartCount">0</span>
@@ -28,7 +38,7 @@
   <main id="inicio" class="container">
     <section class="hero" aria-labelledby="heroTitle">
       <div class="hero-copy">
-        <span class="hero-badge">Novedades · Envíos rápidos</span>
+        <span class="hero-badge">Envíos por NSA o TSI · Retiro coordinado</span>
         <p class="eyebrow">TU TIENDA ONLINE</p>
         <h1 id="heroTitle">Tus favoritos, en un solo lugar.</h1>
         <p id="storeTagline" class="hero-description">Elegí lo que te gusta, agregalo al carrito y coordiná tu compra fácilmente.</p>
@@ -63,12 +73,39 @@
     </section>
 
     <nav class="category-strip" aria-label="Categorías">
-      <button type="button" class="category-pill active">Todo</button>
-      <button type="button" class="category-pill">Bebés</button>
-      <button type="button" class="category-pill">Niños</button>
-      <button type="button" class="category-pill">Ropa</button>
-      <button type="button" class="category-pill">Bazar</button>
+      <button type="button" class="category-pill active" data-category="todo">Todo</button>
+      <button type="button" class="category-pill" data-category="bebes">Bebés</button>
+      <button type="button" class="category-pill" data-category="ninos">Niños</button>
+      <button type="button" class="category-pill" data-category="ropa">Ropa</button>
+      <button type="button" class="category-pill" data-category="belleza">Belleza</button>
+      <button type="button" class="category-pill" data-category="accesorios">Accesorios</button>
+      <button type="button" class="category-pill" data-category="hogar">Hogar</button>
+      <button type="button" class="category-pill" data-category="bazar">Bazar</button>
+      <button type="button" class="category-pill" data-category="novedades">Novedades</button>
     </nav>
+
+    <section class="catalog-tools" aria-label="Buscar y ordenar productos">
+      <label class="search-field" for="searchInput">
+        <span aria-hidden="true">⌕</span>
+        <input id="searchInput" type="search" placeholder="Buscar productos" autocomplete="off">
+      </label>
+      <label class="sort-field" for="sortSelect">
+        <span>Ordenar</span>
+        <select id="sortSelect">
+          <option value="destacados">Destacados</option>
+          <option value="precio-asc">Menor precio</option>
+          <option value="precio-desc">Mayor precio</option>
+          <option value="novedades">Novedades</option>
+        </select>
+      </label>
+    </section>
+
+    <section id="featuredSection" class="featured-section" aria-labelledby="featuredTitle" hidden>
+      <div class="section-heading">
+        <div><p class="eyebrow green">SELECCIÓN MIKARIS</p><h2 id="featuredTitle">Destacados</h2></div>
+      </div>
+      <div class="product-grid featured-grid" id="featuredGrid"></div>
+    </section>
 
     <div class="layout">
       <section id="catalogo" class="catalog" aria-labelledby="catalogTitle">
@@ -83,36 +120,81 @@
         <div class="cart-heading">
           <div><p class="eyebrow green">TU SELECCIÓN</p><h2 id="cartTitle">Mi carrito</h2></div>
           <span class="cart-count cart-count-large" id="asideCartCount">0</span>
+          <button class="cart-close" id="closeCart" type="button" aria-label="Cerrar carrito">×</button>
         </div>
         <div id="cartItems" class="cart-items"></div>
         <div id="cartFooter" class="cart-footer" hidden>
-          <div class="total-line"><span>Total a pagar</span><strong id="cartTotal">₲ 0</strong></div>
+          <div class="total-line"><span>Subtotal productos</span><strong id="cartTotal">₲ 0</strong></div>
           <p class="total-caption">El monto se actualiza al cambiar las cantidades.</p>
-          <button type="button" id="payButton" class="button button-primary button-full" aria-controls="paymentPanel" aria-expanded="false">Pagar por transferencia <span aria-hidden="true">→</span></button>
+          <button type="button" id="payButton" class="button button-primary button-full" aria-controls="paymentPanel" aria-expanded="false">Ver datos para transferir <span aria-hidden="true">→</span></button>
         </div>
         <section id="paymentPanel" class="payment-panel" aria-labelledby="paymentTitle" hidden>
-          <div class="payment-header"><span class="step-circle">✓</span><div><h3 id="paymentTitle">Datos para transferir</h3><p>Revisá el pedido y realizá la transferencia.</p></div></div>
-          <div class="payment-provider">
-            <img class="ueno-logo" src="img/ueno-bank.svg" alt="Ueno bank" width="64" height="64">
-            <div><span class="field-label">Banco receptor</span><strong>Ueno</strong><span class="provider-caption">Transferencia a cuenta Ueno</span></div>
+          <ol class="checkout-steps" aria-label="Pasos de compra">
+            <li data-step-indicator="review"><span>1</span> Revisar</li>
+            <li data-step-indicator="delivery"><span>2</span> Entrega</li>
+            <li data-step-indicator="payment"><span>3</span> Transferir</li>
+          </ol>
+          <div class="checkout-screen" id="checkoutReview">
+            <div class="payment-header"><span class="step-circle">1</span><div><h3>Revisá tu pedido</h3><p>Productos, cantidades y subtotal.</p></div></div>
+            <div class="payment-summary"><ul id="checkoutItems"></ul><div class="payment-total"><span>Subtotal</span><strong id="checkoutSubtotal"></strong></div></div>
+            <button type="button" id="backToCartButton" class="button button-soft button-full">Modificar carrito</button>
+            <button type="button" id="toDeliveryButton" class="button button-primary button-full">Elegir entrega <span aria-hidden="true">→</span></button>
           </div>
-          <div class="alias-block">
-            <span class="field-label">Alias de transferencia</span>
-            <div class="alias-row"><strong id="transferAlias"></strong><button id="copyAliasButton" class="button-copy" type="button">Copiar</button></div>
-            <p id="aliasWarning" class="setup-warning" hidden>Reemplazá el alias de ejemplo en config.js antes de recibir pagos.</p>
-          </div>
-          <div class="payment-summary"><h4>Resumen del pedido</h4><ul id="paymentItems"></ul><div class="payment-total"><span>Total a transferir</span><strong id="paymentTotal"></strong></div></div>
-          <a id="whatsappButton" class="button button-whatsapp button-full" href="#" target="_blank" rel="noopener noreferrer" aria-disabled="true">
+          <form class="checkout-screen" id="deliveryForm" hidden>
+            <div class="payment-header"><span class="step-circle">2</span><div><h3>Elegí cómo recibir</h3><p>Completá los datos para coordinar la entrega.</p></div></div>
+            <label class="form-field" for="deliveryMethod">Modalidad de entrega
+              <select id="deliveryMethod" required>
+                <option value="retiro">Retiro coordinado</option>
+                <option value="local">Entrega local</option>
+                <option value="interior-nsa">Envío al interior por NSA</option>
+                <option value="interior-tsi">Envío al interior por TSI</option>
+              </select>
+            </label>
+            <div class="form-grid">
+              <label class="form-field" for="customerName">Nombre y apellido<input id="customerName" name="name" autocomplete="name" required></label>
+              <label class="form-field" for="customerPhone">Teléfono de contacto<input id="customerPhone" name="tel" type="tel" autocomplete="tel" required></label>
+            </div>
+            <label class="form-field" id="deliveryLocationField" for="deliveryLocation" hidden>Dirección o ciudad de destino
+              <input id="deliveryLocation" name="location" autocomplete="street-address">
+            </label>
+            <label class="form-field" for="deliveryNotes">Indicaciones adicionales <span>(opcional)</span><textarea id="deliveryNotes" rows="2"></textarea></label>
+            <p class="delivery-cost-note">Costo estimado de entrega: <strong id="deliveryCost">Sin costo</strong>. El costo y el plazo se confirman antes de transferir.</p>
+            <div class="checkout-actions">
+              <button type="button" class="button button-soft" id="backToReviewButton">Atrás</button>
+              <button type="submit" class="button button-primary">Continuar <span aria-hidden="true">→</span></button>
+            </div>
+          </form>
+          <section class="checkout-screen" id="paymentStep" aria-labelledby="paymentTitle" hidden>
+            <div class="payment-header"><span class="step-circle">3</span><div><h3 id="paymentTitle">Transferencia y confirmación</h3><p>Revisá entrega y monto antes de transferir.</p></div></div>
+            <div class="payment-provider">
+              <img class="ueno-logo" src="img/ueno-bank.svg" alt="Ueno bank" width="64" height="64">
+              <div><span class="field-label">Banco receptor</span><strong>Ueno</strong><span class="provider-caption">Transferencia a cuenta Ueno</span></div>
+            </div>
+            <div class="alias-block">
+              <span class="field-label">Alias de transferencia</span>
+              <div class="alias-row"><strong id="transferAlias"></strong><button id="copyAliasButton" class="button-copy" type="button">Copiar</button></div>
+              <p id="aliasWarning" class="setup-warning" hidden>Reemplazá el alias de ejemplo en config.js antes de recibir pagos.</p>
+            </div>
+            <div class="payment-summary"><h4>Resumen del pedido</h4><p class="confirmed-delivery" id="paymentDeliveryMethod"></p><ul id="paymentItems"></ul><div class="payment-total"><span>Subtotal</span><strong id="paymentSubtotal"></strong></div><div class="payment-total delivery-total"><span>Entrega</span><strong id="paymentDeliveryFee"></strong></div><div class="payment-total"><span>Total a transferir</span><strong id="paymentTotal"></strong></div></div>
+            <button type="button" class="button button-soft button-full" id="backToDeliveryButton">Cambiar datos de entrega</button>
+            <a id="whatsappButton" class="button button-whatsapp button-full" href="#" target="_blank" rel="noopener noreferrer" aria-disabled="true">
             <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M20.52 3.48A11.87 11.87 0 0 0 12.05 0C5.46 0 .1 5.36.1 11.95c0 2.1.55 4.14 1.6 5.94L0 24l6.27-1.64a11.9 11.9 0 0 0 5.78 1.47H12c6.59 0 11.95-5.36 11.95-11.95 0-3.19-1.24-6.19-3.43-8.4ZM12 21.8a9.88 9.88 0 0 1-5.04-1.38l-.36-.22-3.72.98.99-3.63-.24-.38a9.9 9.9 0 0 1-1.52-5.22C2.11 6.52 6.56 2.1 12.04 2.1c2.65 0 5.14 1.03 7.01 2.9a9.84 9.84 0 0 1 2.9 7.01A9.94 9.94 0 0 1 12 21.8Zm5.45-7.4c-.3-.15-1.77-.87-2.04-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.23-.65.08-.3-.15-1.26-.46-2.4-1.47-.89-.79-1.49-1.77-1.66-2.07-.17-.3-.02-.47.13-.62.14-.13.3-.35.45-.52.15-.18.2-.3.3-.5.1-.2.05-.38-.02-.53-.08-.15-.68-1.62-.93-2.22-.24-.58-.48-.5-.67-.5h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.22 3.08c.15.2 2.12 3.24 5.13 4.54.72.31 1.28.5 1.72.64.72.23 1.38.2 1.9.12.58-.09 1.77-.72 2.02-1.42.25-.7.25-1.3.17-1.42-.07-.13-.27-.2-.57-.35Z"/></svg>
             Enviar pedido por WhatsApp
           </a>
-          <p id="whatsappWarning" class="setup-warning" hidden>Configurá tu número de WhatsApp en config.js para habilitar el botón.</p>
-          <p class="proof-note">Al abrir WhatsApp, <strong>adjuntá manualmente el comprobante</strong> (foto o archivo) en el chat antes de enviarlo.</p>
-          <p class="verification-note">El pedido queda pendiente hasta que el negocio verifique la transferencia.</p>
+            <p id="whatsappWarning" class="setup-warning" hidden>Configurá tu número de WhatsApp en config.js para habilitar el botón.</p>
+            <p class="proof-note">Al abrir WhatsApp, <strong>adjuntá manualmente el comprobante</strong> antes de enviar el mensaje.</p>
+            <p class="verification-note">El pedido queda pendiente hasta que el negocio verifique la transferencia.</p>
+          </section>
         </section>
       </aside>
     </div>
   </main>
+
+  <section class="store-assurances container" aria-label="Información de compra">
+    <article><span class="assurance-icon" aria-hidden="true">↗</span><h2>Entregas coordinadas</h2><p>Retiro, entrega local o envío al interior por NSA y TSI. Confirmamos costo y plazo antes del pago.</p></article>
+    <article><span class="assurance-icon" aria-hidden="true">₲</span><h2>Transferencia segura</h2><p>Transferí a Ueno y enviá el comprobante por WhatsApp. Verificamos el pago antes de entregar.</p></article>
+    <article><span class="assurance-icon" aria-hidden="true">↺</span><h2>Cambios</h2><p>Consultá disponibilidad y condiciones de cambio antes de confirmar tu compra.</p></article>
+  </section>
 
   <footer class="footer">
     <div class="container footer-inner">
@@ -121,7 +203,8 @@
     </div>
     <div class="container copyright-line">© 2026 Mikaris Store. Todos los derechos reservados.</div>
   </footer>
-  <a class="mobile-cart-shortcut" id="mobileCartShortcut" href="#carrito" aria-label="Ver carrito y total"><span>🛒 Ver carrito <span id="mobileCartCount">(0)</span></span><strong id="mobileCartTotal">₲ 0</strong></a>
+  <button class="mobile-cart-shortcut" id="mobileCartShortcut" type="button" aria-controls="carrito" aria-expanded="false" hidden><span>Ver carrito <span id="mobileCartCount">(0)</span></span><strong id="mobileCartTotal">₲ 0</strong></button>
+  <button class="cart-backdrop" id="cartBackdrop" type="button" aria-label="Cerrar carrito" hidden></button>
   <div class="toast" id="toast" role="status" aria-live="polite" aria-atomic="true"></div>
 </body>
 </html>
