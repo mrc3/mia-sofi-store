@@ -118,6 +118,11 @@ h2{margin:0;font-size:1.63rem;line-height:1.2;letter-spacing:-.04em;color:var(--
 .step-circle{background:linear-gradient(135deg,var(--rose-100),var(--peach-soft));color:var(--rose-700);border-radius:50%;height:30px;width:30px;display:grid;place-items:center;font-weight:900;flex:0 0 30px}
 .payment-header h3{margin:0 0 2px;font-size:1.03rem;color:var(--ink)}
 .payment-header p{margin:0;font-size:.82rem;color:var(--muted)}
+.payment-provider{display:flex;align-items:center;gap:12px;margin-bottom:14px;padding:10px 12px;border:1px solid #b9eee2;border-radius:12px;background:linear-gradient(105deg,#edfcf8,#f7fffc)}
+.ueno-logo{display:block;width:58px;height:58px;flex:0 0 58px;border-radius:12px;box-shadow:0 5px 12px rgba(0,137,111,.13)}
+.payment-provider div{display:grid;gap:1px}
+.payment-provider strong{font-size:.94rem;line-height:1.25;color:#087e68}
+.provider-caption{font-size:.76rem;color:var(--muted)}
 .alias-block{background:linear-gradient(135deg,#fff3f7,#fffafc);padding:15px;border-radius:12px;margin-bottom:16px;border:1px solid var(--border)}
 .field-label{font-size:.76rem;color:var(--muted);font-weight:700}
 .alias-row{display:flex;gap:8px;align-items:center;justify-content:space-between;margin-top:6px;min-width:0}

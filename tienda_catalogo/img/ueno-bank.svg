@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" role="img" aria-labelledby="title">
+  <title id="title">Ueno bank</title>
+  <rect width="400" height="400" rx="24" fill="#00c99a"/>
+  <g fill="#fff" font-family="Arial Rounded MT Bold, Trebuchet MS, sans-serif" font-weight="700" text-anchor="middle">
+    <text x="200" y="198" font-size="100">ueno</text>
+    <text x="249" y="239" font-size="43">bank</text>
+  </g>
+</svg>

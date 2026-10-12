@@ -10,8 +10,8 @@ window.TIENDA_CONFIG = {
     lema: "Ropa, accesorios y bazar para bebés, nenes y criaturas tiernas",
     moneda: "PYG",
     idioma: "es-PY",
-    aliasTransferencia: "mia-sofi-store.ci",
-    whatsapp: "595991830352"
+    aliasTransferencia: "5107171 - CI - Karina Caniza",
+    whatsapp: "+595 974 587992"
   },
 
   productos: [

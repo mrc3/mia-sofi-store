@@ -7,7 +7,7 @@
   <meta name="description" content="Elegí tus productos, armá tu carrito y coordiná el pago por transferencia y WhatsApp.">
   <title>Catálogo y carrito | Tienda</title>
   <link rel="stylesheet" href="styles.css">
-  <script src="config.js?v=2" defer></script>
+  <script src="config.js?v=3" defer></script>
   <script src="app.js" defer></script>
 </head>
 <body>
@@ -92,6 +92,10 @@
         </div>
         <section id="paymentPanel" class="payment-panel" aria-labelledby="paymentTitle" hidden>
           <div class="payment-header"><span class="step-circle">✓</span><div><h3 id="paymentTitle">Datos para transferir</h3><p>Revisá el pedido y realizá la transferencia.</p></div></div>
+          <div class="payment-provider">
+            <img class="ueno-logo" src="img/ueno-bank.svg" alt="Ueno bank" width="64" height="64">
+            <div><span class="field-label">Banco receptor</span><strong>Ueno</strong><span class="provider-caption">Transferencia a cuenta Ueno</span></div>
+          </div>
           <div class="alias-block">
             <span class="field-label">Alias de transferencia</span>
             <div class="alias-row"><strong id="transferAlias"></strong><button id="copyAliasButton" class="button-copy" type="button">Copiar</button></div>
