@@ -6,7 +6,7 @@
 
 window.TIENDA_CONFIG = {
   negocio: {
-    nombre: "Mia Sofi Store",
+    nombre: "Mikaris Store",
     lema: "Ropa, accesorios y bazar para bebés, nenes y criaturas tiernas",
     moneda: "PYG",
     idioma: "es-PY",
