@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 120" role="img" aria-labelledby="title">
+  <title id="title">NSA Encomiendas</title>
+  <rect width="360" height="120" rx="12" fill="#06428e"/>
+  <text x="36" y="71" fill="#fff" font-family="Arial, sans-serif" font-size="70" font-style="italic" font-weight="900">NSA</text>
+  <path d="m225 17 18 2-28 59-18-2z" fill="#ed1c24"/>
+  <path d="M31 91h32M39 99h24M47 107h16" fill="none" stroke="#ed1c24" stroke-linecap="round" stroke-width="4"/>
+  <text x="73" y="107" fill="#fff" font-family="Arial, sans-serif" font-size="21" font-style="italic" font-weight="800">ENCOMIENDAS</text>
+</svg>

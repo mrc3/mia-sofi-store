@@ -59,11 +59,7 @@ h1{font-size:clamp(2rem,5vw,3.9rem);line-height:1.08;letter-spacing:-.052em;max-
 .shipping-copy h2{margin:0}
 .shipping-description{margin:7px 0 0;color:var(--muted);font-size:.91rem}
 .shipping-carriers{display:flex;gap:10px}
-.carrier-logo{min-width:105px;min-height:66px;display:grid;align-content:center;justify-items:center;gap:1px;padding:9px 14px;border:1px solid #e9cbd8;border-radius:12px;text-align:center}
-.carrier-logo-nsa{background:#fff;color:var(--rose-800);box-shadow:inset 0 -3px 0 var(--rose-500)}
-.carrier-logo-tsi{background:#344e58;color:#fff;border-color:#344e58;box-shadow:inset 0 -3px 0 #e5bd82}
-.carrier-logo-main{font-size:1.3rem;font-weight:900;line-height:1.1;letter-spacing:0}
-.carrier-logo-caption{font-size:.56rem;font-weight:800;line-height:1.2;letter-spacing:0}
+.carrier-logo{display:block;width:148px;height:82px;flex:0 1 148px;max-width:calc(50% - 5px);object-fit:contain;padding:3px;background:#fff;border:1px solid #e9cbd8;border-radius:12px}
 .brand-spotlight{padding-top:18px}
 .brand-spotlight-card{max-width:300px;margin:0 auto;background:linear-gradient(135deg,#fff4f8,#fffafc);border:1px solid var(--border);border-radius:28px;padding:18px;box-shadow:0 16px 30px rgba(181,92,131,.08)}
 .brand-spotlight-card img{display:block;width:100%;height:auto;border-radius:20px}
@@ -150,5 +146,5 @@ body{padding-bottom:63px}
 @media(min-width:980px){.layout{grid-template-columns:minmax(0,1fr) 350px;gap:27px}.cart-panel{position:sticky;top:95px;max-height:calc(100vh - 115px);overflow-y:auto;scrollbar-width:thin}.hero{min-height:320px}.product-grid{gap:18px}.mobile-cart-shortcut{display:none}body{padding-bottom:0}}
 @media(min-width:1180px){.layout{grid-template-columns:minmax(0,1fr) 360px;gap:32px}}
 @media(max-width:375px){.header-cart{gap:5px}.brand{font-size:.97rem}.container{width:calc(100% - 24px)}.hero{padding:30px 24px}.cart-panel{padding:18px 14px}}
-@media(max-width:599px){.shipping-notice{grid-template-columns:minmax(0,1fr);gap:16px;padding:19px}.shipping-carriers{width:100%}.carrier-logo{flex:1;min-width:0}}
+@media(max-width:599px){.shipping-notice{grid-template-columns:minmax(0,1fr);gap:16px;padding:19px}.shipping-carriers{width:100%}.carrier-logo{flex:1 1 0;width:0;min-width:0;max-width:none}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{transition:none!important}}

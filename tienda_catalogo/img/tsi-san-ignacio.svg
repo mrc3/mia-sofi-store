@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 230" role="img" aria-labelledby="title">
+  <title id="title">TSI Transportadora San Ignacio</title>
+  <rect width="480" height="230" rx="12" fill="#fffefa"/>
+  <g font-family="Arial, sans-serif" font-style="italic" font-weight="900" paint-order="stroke">
+    <text x="32" y="112" fill="#f58220" font-size="112" stroke="#d9d9d9" stroke-width="5">T</text>
+    <text x="136" y="112" fill="#111" font-size="119" stroke="#d9d9d9" stroke-width="5">S</text>
+    <text x="264" y="112" fill="#f58220" font-size="112" stroke="#d9d9d9" stroke-width="5">i</text>
+  </g>
+  <path d="M160 74h62c14 0 23 8 23 18s-9 18-23 18h-33c-14 0-23 8-23 18s9 18 23 18h65" fill="none" stroke="#fff" stroke-dasharray="19 12" stroke-linecap="round" stroke-width="6"/>
+  <text x="75" y="163" fill="#111" font-family="Arial, sans-serif" font-size="29" font-weight="900">TRANSPORTADORA</text>
+  <text x="106" y="205" fill="#f58220" font-family="Arial, sans-serif" font-size="34" font-style="italic" font-weight="900">San Ignacio</text>
+</svg>
