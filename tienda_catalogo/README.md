@@ -16,7 +16,8 @@ Editá **solo `config.js`** para los cambios habituales:
 - `negocio.aliasTransferencia`: reemplazá `TU_ALIAS_AQUI` por el alias real de tu cuenta.
 - `negocio.whatsapp`: número **del vendedor** en formato internacional, sin `+`, guiones ni espacios. Por ejemplo, para Paraguay, `595981123456` es *solo un ejemplo de formato*, **no** un número al que debas enviar clientes.
 - `negocio.moneda` y `negocio.idioma`: por defecto se usan guaraníes y formato de Paraguay.
-- `productos`: cada producto tiene `id`, `nombre`, `descripcion`, `precio` (número), `imagen` y `categoria` (una o varias). Usá `id` únicos y no los cambies una vez publicada la tienda, para conservar el carrito.
+- `productos`: cada producto tiene `id`, `nombre`, `descripcion`, `precio` (número en guaraníes o `null` si falta definirlo), `imagen` y `categoria` (una o varias). Usá el código del inventario como `id` y no lo cambies una vez publicada la tienda, para conservar el carrito.
+- Si `precio` es `null`, la tienda muestra “Consultar precio”. El artículo se puede incluir en un pedido por WhatsApp, pero el monto queda pendiente y no se muestran datos de transferencia hasta confirmar el precio.
 - `destacado: true` incluye el producto en la selección destacada; `novedad: true` lo marca para el filtro y el orden de novedades.
 - `stock`: usá un entero para mostrar unidades, `0` para agotado; si se omite, el catálogo indica que hay que consultar disponibilidad y no inventa cantidades.
 - `imagenes`: lista opcional de rutas adicionales para activar la galería. Por ejemplo, `imagenes: ["img/foto-frente.webp", "img/foto-detalle.webp"]`.
@@ -25,6 +26,8 @@ Editá **solo `config.js`** para los cambios habituales:
 Para usar tus fotos, copialas en `img/` y cambiá la ruta de `imagen`; agregá más tomas a `imagenes`. Se admiten JPG, PNG, WebP, AVIF y SVG. Priorizá WebP/AVIF comprimidos, buena iluminación y una proporción consistente.
 
 **Importante:** mientras el alias y WhatsApp no estén configurados, el botón de WhatsApp estará deshabilitado, para evitar pedidos a datos ficticios.
+
+El inventario original se conserva en la raíz del proyecto y está excluido de Git porque contiene costos e inversión. No lo copies dentro de `tienda_catalogo/`, que es la carpeta publicada por GitHub Pages.
 
 ## 3. Cómo funciona
 

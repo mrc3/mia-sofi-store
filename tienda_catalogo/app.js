@@ -10,9 +10,10 @@
   const STORAGE_KEY = "carrito_tienda_v1";
   const MAX_QTY = 99;
   const negocio = config.negocio;
+  const tienePrecio = p => Number.isFinite(p.precio) && p.precio >= 0;
   const productos = config.productos.filter(p =>
     p && typeof p.id === "string" && p.id.trim() &&
-    typeof p.nombre === "string" && Number.isFinite(p.precio) && p.precio >= 0
+    typeof p.nombre === "string" && (p.precio == null || tienePrecio(p))
   );
   const porId = new Map(productos.map(p => [p.id, p]));
   const $ = (id) => document.getElementById(id);
@@ -35,7 +36,11 @@
     return node;
   };
   const cantidadValida = (v) => Math.max(1, Math.min(MAX_QTY, Math.trunc(Number(v) || 1)));
-  const total = () => Object.entries(cart).reduce((sum, [id, qty]) => sum + (porId.get(id)?.precio || 0) * qty, 0);
+  const total = () => {
+    const items = Object.entries(cart);
+    if (items.some(([id]) => !tienePrecio(porId.get(id)))) return null;
+    return items.reduce((sum, [id, qty]) => sum + porId.get(id).precio * qty, 0);
+  };
   const unidades = () => Object.values(cart).reduce((sum, qty) => sum + qty, 0);
   const costoEntrega = () => {
     const metodo = $("deliveryMethod").value;
@@ -117,7 +122,7 @@
     if (fijarAncla) tarjeta.id = `producto-${p.id}`;
     const rutas = imagenesDe(p);
     const imagenCont = texto("div", "product-image-wrap");
-    const badge = texto("span", "product-badge", p.badge || "Nuevo");
+    if (p.badge) imagenCont.append(texto("span", "product-badge", p.badge));
     const imagen = texto("img", "product-image");
     let imagenActual = 0;
     imagen.src = rutas[imagenActual];
@@ -126,7 +131,7 @@
     imagen.addEventListener("error", () => {
       if (!imagen.src.endsWith("sin-imagen.svg")) imagen.src = "img/sin-imagen.svg";
     });
-    imagenCont.append(badge, imagen);
+    imagenCont.append(imagen);
     if (rutas.length > 1) {
       const controlesGaleria = texto("div", "gallery-controls");
       const anterior = texto("button", "gallery-arrow", "‹");
@@ -153,7 +158,7 @@
     const estadoStock = stock === 0 ? "Agotado" : stock === null ? "Consultar disponibilidad" : `${stock} disponibles`;
     const claseStock = stock === 0 ? " out-of-stock" : stock === null ? " unknown" : "";
     cuerpo.append(texto("span", `product-availability${claseStock}`, estadoStock));
-    cuerpo.append(texto("div", "product-price", dinero(p.precio)));
+    cuerpo.append(texto("div", "product-price", tienePrecio(p) ? dinero(p.precio) : "Consultar precio"));
     const tools = texto("div", "product-tools");
     const compartir = texto("button", "share-button");
     compartir.type = "button";
@@ -215,8 +220,8 @@
       const coincideTexto = !termino || `${p.nombre} ${p.descripcion || ""} ${p.badge || ""}`.toLocaleLowerCase("es").includes(termino);
       return coincideCategoria && coincideTexto;
     });
-    if (orden === "precio-asc") filtrados.sort((a, b) => a.precio - b.precio);
-    if (orden === "precio-desc") filtrados.sort((a, b) => b.precio - a.precio);
+    if (orden === "precio-asc") filtrados.sort((a, b) => Number(!tienePrecio(a)) - Number(!tienePrecio(b)) || (a.precio ?? 0) - (b.precio ?? 0));
+    if (orden === "precio-desc") filtrados.sort((a, b) => Number(!tienePrecio(a)) - Number(!tienePrecio(b)) || (b.precio ?? 0) - (a.precio ?? 0));
     if (orden === "novedades") filtrados.sort((a, b) => Number(esNovedad(b)) - Number(esNovedad(a)));
     if (orden === "destacados") filtrados.sort((a, b) => Number(esDestacado(b)) - Number(esDestacado(a)));
     return filtrados;
@@ -240,7 +245,8 @@
     contenedor.replaceChildren();
     const entries = Object.entries(cart).filter(([id, qty]) => porId.has(id) && qty > 0);
     const count = unidades();
-    const monto = dinero(total());
+    const importeTotal = total();
+    const monto = importeTotal === null ? "A confirmar" : dinero(importeTotal);
     $("headerCartCount").textContent = count;
     $("asideCartCount").textContent = count;
     $("mobileCartCount").textContent = `(${count})`;
@@ -276,7 +282,8 @@
         if (!img.src.endsWith("sin-imagen.svg")) img.src = "img/sin-imagen.svg";
       });
       const detalles = texto("div", "");
-      detalles.append(texto("p", "cart-item-name", p.nombre), texto("p", "cart-item-price", `${dinero(p.precio)} c/u`));
+      const precioUnitario = tienePrecio(p) ? `${dinero(p.precio)} c/u` : "Precio a confirmar";
+      detalles.append(texto("p", "cart-item-name", p.nombre), texto("p", "cart-item-price", precioUnitario));
       const controles = texto("div", "cart-line-controls");
       const stepper = texto("div", "stepper");
       const menos = texto("button", "", "−");
@@ -295,7 +302,7 @@
       quitar.type = "button";
       quitar.setAttribute("aria-label", `Eliminar ${p.nombre} del carrito`);
       quitar.addEventListener("click", () => actualizarCantidad(id, 0));
-      controles.append(stepper, quitar, texto("strong", "line-price", dinero(qty * p.precio)));
+      controles.append(stepper, quitar, texto("strong", "line-price", tienePrecio(p) ? dinero(qty * p.precio) : "A confirmar"));
       detalles.append(controles);
       fila.append(img, detalles);
       contenedor.append(fila);
@@ -318,26 +325,38 @@
     resumen.replaceChildren();
     pagoResumen.replaceChildren();
     const lineas = [];
+    const hayPreciosPendientes = Object.keys(cart).some(id => !tienePrecio(porId.get(id)));
     for (const [id, qty] of Object.entries(cart)) {
       const producto = porId.get(id);
       if (!producto || qty < 1) continue;
-      const linea = `${qty} × ${producto.nombre}`;
-      const importe = dinero(producto.precio * qty);
+      const linea = `${qty} × [${producto.id}] ${producto.nombre}${producto.descripcion ? ` · ${producto.descripcion}` : ""}`;
+      const importe = tienePrecio(producto) ? dinero(producto.precio * qty) : "Precio a confirmar";
       for (const destino of [resumen, pagoResumen]) {
         const li = document.createElement("li");
         li.append(texto("span", "", linea), texto("span", "", importe));
         destino.append(li);
       }
-      lineas.push(`• ${linea}: ${importe}`);
+      lineas.push(`• ${linea}\n  Precio: ${importe}`);
     }
-    $("checkoutSubtotal").textContent = dinero(total());
-    $("paymentSubtotal").textContent = dinero(total());
+    const subtotal = total();
+    const subtotalTexto = subtotal === null ? "A confirmar" : dinero(subtotal);
+    $("checkoutSubtotal").textContent = subtotalTexto;
+    $("paymentSubtotal").textContent = subtotalTexto;
     const metodo = $("deliveryMethod").value;
     const costo = costoEntrega();
     const textoCosto = costo === null ? "A coordinar" : costo === 0 ? "Sin costo" : dinero(costo);
     $("deliveryCost").textContent = textoCosto;
     $("paymentDeliveryFee").textContent = textoCosto;
-    $("paymentTotal").textContent = costo === null ? "A confirmar" : dinero(total() + costo);
+    $("paymentTotal").textContent = subtotal === null || costo === null ? "A confirmar" : dinero(subtotal + costo);
+    $("paymentTitle").textContent = hayPreciosPendientes ? "Confirmar pedido" : "Transferencia y confirmación";
+    $("paymentDescription").textContent = hayPreciosPendientes
+      ? "El negocio confirmará los precios antes del pago."
+      : "Revisá entrega y monto antes de transferir.";
+    $("paymentProvider").hidden = hayPreciosPendientes;
+    $("aliasBlock").hidden = hayPreciosPendientes;
+    $("pendingPricesNote").hidden = !hayPreciosPendientes;
+    $("proofNote").hidden = hayPreciosPendientes;
+    $("verificationNote").hidden = hayPreciosPendientes;
     const requiereDestino = metodo !== "retiro";
     $("deliveryLocationField").hidden = !requiereDestino;
     $("deliveryLocation").required = requiereDestino;
@@ -358,7 +377,9 @@
       metodo === "local" ? `Entrega local: ${destino}` :
         `Envío al interior por ${metodo === "interior-nsa" ? "NSA" : "TSI"}: ${destino}`;
     $("paymentDeliveryMethod").textContent = `${etiquetaEntrega} · ${nombre} · ${contacto}`;
-    const totalFinal = costo === null ? "A confirmar con el costo de entrega" : dinero(total() + costo);
+    const totalFinal = subtotal === null
+      ? "A confirmar por precios pendientes"
+      : costo === null ? "A confirmar con el costo de entrega" : dinero(subtotal + costo);
     const mensaje = [
       `¡Hola! Quiero confirmar este pedido de ${negocio.nombre}:`,
       `Cliente: ${nombre}`,
@@ -367,11 +388,13 @@
       ...(notas ? [`Indicaciones: ${notas}`] : []),
       "",
       ...lineas,
-      `Subtotal productos: ${dinero(total())}`,
+      ...(hayPreciosPendientes ? ["Hay productos sin precio publicado; el negocio confirmará el monto por WhatsApp."] : []),
+      `Subtotal productos: ${subtotalTexto}`,
       `Costo de entrega: ${textoCosto}`,
       `TOTAL: ${totalFinal}`,
-      `Transferencia a Ueno, alias: ${alias}`,
-      "Adjuntaré el comprobante en este chat."
+      ...(hayPreciosPendientes
+        ? ["El pago se coordinará cuando se confirmen los precios."]
+        : [`Transferencia a Ueno, alias: ${alias}`, "Adjuntaré el comprobante en este chat."])
     ].join("\n");
     const link = $("whatsappButton");
     const datosValidos = $("deliveryForm").checkValidity();
